@@ -26,8 +26,6 @@ jobs:
           branch: main
           base: production
           title: "[Release]: ${{github.event.commits[0].message}}"
-          body: "## Automated changes by [create-pull-request](https://github.com/peter-evans/create-pull-request) GitHub action\n
-                - [] Close and repoen the PR  
-                "
+          body: "## Automated changes by [create-pull-request](https://github.com/peter-evans/create-pull-request) GitHub action\n- [] Close and repoen the PR "
       - name: Dump Github Commit context
         run: echo ${{toJSON(github.event)}
