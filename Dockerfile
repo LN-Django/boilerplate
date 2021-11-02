@@ -4,10 +4,16 @@ FROM python:3.9-alpine
 # set work directory
 WORKDIR /app
 
+ARG APP_NAME
+ARG SECRET_KEY
+
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV DEBUG 0
+
+ENV DJANGO_APP_NAME=$APP_NAME
+ENV DJANGO_SECRET_KEY=$SECRET_KEY
 
 # install psycopg2
 RUN apk update \
@@ -29,4 +35,4 @@ RUN adduser -D myuser
 USER myuser
 
 # run gunicorn
-CMD cd ./boilerplate && gunicorn boilerplate.wsgi:application --bind 0.0.0.0:$PORT
+CMD cd ./boilerplate && python manage.py collectstatic && gunicorn boilerplate.wsgi:application --bind 0.0.0.0:$PORT

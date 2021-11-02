@@ -29,3 +29,9 @@ jobs:
           heroku_app_name: ${{ secrets.PRODUCTION_APP_NAME }}
           heroku_email: "louisandrew3@gmail.com"
           usedocker: true
+          docker_build_args: |
+            APP_NAME
+            SECRET_KEY
+        env:
+          APP_NAME: ${{ secrets.PRODUCTION_APP_NAME }}
+          SECRET_KEY: ${{secrets.SECRET_KEY}}
